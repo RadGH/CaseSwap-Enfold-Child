@@ -8,12 +8,16 @@
  *   2. "secondary" - Displayed at the top of the page (I assume). Replaces "avia2"
  *   3. "footer" - Displayed in the footer. Replaces "avia3"
  */
-
 function caseswap_menu_location( $location ) {
   if ( is_user_logged_in() ) return $location . '-logged_in';
   else return $location . '-logged_out';
 }
 
+/*
+ * Add custom, descriptive menus with a logged in and logged out variation.
+ *
+ * And unregister the Enfold default menus (avia, avia2, avia3), as they have been replaced.
+ */
 function caseswap_register_menus() {
   register_nav_menus(array(
     'primary-logged_out' => 'Primary (Logged Out)', // replaces "avia"
