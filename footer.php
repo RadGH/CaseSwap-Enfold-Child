@@ -107,7 +107,7 @@ if(!$blank && $footer_widget_setting != 'nofooterarea' )
         }
 
         echo "<nav class='sub_menu_socket' ".avia_markup_helper(array('context' => 'nav', 'echo' => false)).">";
-        $avia_theme_location = 'avia3';
+        $avia_theme_location = caseswap_menu_location('footer');
         $avia_menu_class = $avia_theme_location . '-menu';
 
         $args = array(

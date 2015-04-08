@@ -41,7 +41,7 @@ if(isset($headerS['disabled'])) return;
         if(strpos( $headerS['header_secondary_menu'], 'extra_header_active') !== false )
         {
           //display the small submenu
-          $avia_theme_location = 'avia2';
+          $avia_theme_location = caseswap_menu_location('secondary');
           $avia_menu_class = $avia_theme_location . '-menu';
           $args = array(
             'theme_location'=>$avia_theme_location,
@@ -119,7 +119,12 @@ if(isset($headerS['disabled'])) return;
         echo $extraClose;
 
         echo "<nav class='main_menu' data-selectname='".__('Select a page','avia_framework')."' ".avia_markup_helper(array('context' => 'nav', 'echo' => false)).">";
-        $avia_theme_location = 'avia';
+
+
+        // If user is logged in, replace
+        $avia_theme_location = caseswap_menu_location('primary');
+
+
         $avia_menu_class = $avia_theme_location . '-menu';
         $args = array(
           'theme_location'	=> $avia_theme_location,
