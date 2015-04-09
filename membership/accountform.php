@@ -41,9 +41,8 @@ $profileuser = get_user_to_edit( $user_id );
 
       <div class="form-element">
         <label class="control-label" for="user_login"><?php _e( 'Username', 'membership' ); ?></label>
-        <div class="element">
-          <input type="text" class="input-xlarge" id="user_login" nmae="user_login" placeholder="" value="<?php echo esc_attr( $profileuser->user_login ); ?>" disabled="disabled" >
-          <p class="help-block"><?php _e( 'Usernames cannot be changed.', 'membership' ); ?></p>
+        <div class="element plaintext-element">
+          <input type="text" id="user_login" nmae="user_login" class="plaintext-input" placeholder="" value="<?php echo esc_attr( $profileuser->user_login ); ?>" disabled="disabled" >
         </div>
       </div>
 
@@ -61,42 +60,50 @@ $profileuser = get_user_to_edit( $user_id );
         </div>
       </div>
 
-      <div class="form-element">
-        <label class="control-label" for="nickname"><?php _e( 'Nickname', 'membership' ); ?></label>
-        <div class="element">
-          <input type="text" class="input-xlarge" id="nickname" name="nickname" placeholder="" value="<?php echo esc_attr( $profileuser->nickname ) ?>" >
-        </div>
-      </div>
+      <?php
+      /*
+			<div class="form-element">
+				<label class="control-label" for="nickname"><?php _e( 'Nickname', 'membership' ); ?></label>
+				<div class="element">
+					<input type="text" class="input-xlarge" id="nickname" name="nickname" placeholder="" value="<?php echo esc_attr( $profileuser->nickname ) ?>" >
+				</div>
+			</div>
+      */
+      ?>
 
-      <div class="form-element">
-        <label class="control-label" for="display_name"><?php _e( 'Display name as', 'membership' ); ?></label>
-        <div class="element">
-          <select name="display_name" id="display_name">
-            <?php
-            $public_display = array();
-            $public_display['display_username'] = $profileuser->user_login;
-            $public_display['display_nickname'] = $profileuser->nickname;
-            if ( !empty( $profileuser->first_name ) )
-              $public_display['display_firstname'] = $profileuser->first_name;
-            if ( !empty( $profileuser->last_name ) )
-              $public_display['display_lastname'] = $profileuser->last_name;
-            if ( !empty( $profileuser->first_name ) && !empty( $profileuser->last_name ) ) {
-              $public_display['display_firstlast'] = $profileuser->first_name . ' ' . $profileuser->last_name;
-              $public_display['display_lastfirst'] = $profileuser->last_name . ' ' . $profileuser->first_name;
-            }
-            if ( !in_array( $profileuser->display_name, $public_display ) ) // Only add this if it isn't duplicated elsewhere
-              $public_display = array( 'display_displayname' => $profileuser->display_name ) + $public_display;
-            $public_display = array_map( 'trim', $public_display );
-            $public_display = array_unique( $public_display );
-            foreach ( $public_display as $id => $item ) {
-              ?>
-              <option id="<?php echo $id; ?>" value="<?php echo esc_attr( $item ); ?>"<?php selected( $profileuser->display_name, $item ); ?>><?php echo $item; ?></option>
-            <?php
-            }
-            ?>
-          </select>
-        </div>
-      </div>
+      <?php
+      /*
+			<div class="form-element">
+				<label class="control-label" for="display_name"><?php _e( 'Display name as', 'membership' ); ?></label>
+				<div class="element">
+					<select name="display_name" id="display_name">
+						<?php
+						$public_display = array();
+						$public_display['display_username'] = $profileuser->user_login;
+						$public_display['display_nickname'] = $profileuser->nickname;
+						if ( !empty( $profileuser->first_name ) )
+							$public_display['display_firstname'] = $profileuser->first_name;
+						if ( !empty( $profileuser->last_name ) )
+							$public_display['display_lastname'] = $profileuser->last_name;
+						if ( !empty( $profileuser->first_name ) && !empty( $profileuser->last_name ) ) {
+							$public_display['display_firstlast'] = $profileuser->first_name . ' ' . $profileuser->last_name;
+							$public_display['display_lastfirst'] = $profileuser->last_name . ' ' . $profileuser->first_name;
+						}
+						if ( !in_array( $profileuser->display_name, $public_display ) ) // Only add this if it isn't duplicated elsewhere
+							$public_display = array( 'display_displayname' => $profileuser->display_name ) + $public_display;
+						$public_display = array_map( 'trim', $public_display );
+						$public_display = array_unique( $public_display );
+						foreach ( $public_display as $id => $item ) {
+							?>
+							<option id="<?php echo $id; ?>" value="<?php echo esc_attr( $item ); ?>"<?php selected( $profileuser->display_name, $item ); ?>><?php echo $item; ?></option>
+							<?php
+						}
+						?>
+					</select>
+				</div>
+			</div>
+      */
+      ?>
 
       <div class="form-element">
         <label class="control-label" for="email"><?php _e( 'Email', 'membership' ); ?></label>
@@ -105,12 +112,16 @@ $profileuser = get_user_to_edit( $user_id );
         </div>
       </div>
 
-      <div class="form-element">
-        <label class="control-label" for="url"><?php _e( 'Website', 'membership' ); ?></label>
-        <div class="element">
-          <input type="text" class="input-xlarge" name="url" id="url" value="<?php echo esc_attr( $profileuser->user_url ) ?>" />
-        </div>
-      </div>
+      <?php
+      /*
+			<div class="form-element">
+				<label class="control-label" for="url"><?php _e( 'Website', 'membership' ); ?></label>
+				<div class="element">
+					<input type="text" class="input-xlarge" name="url" id="url" value="<?php echo esc_attr( $profileuser->user_url ) ?>" />
+				</div>
+			</div>
+      */
+      ?>
 
       <div class="form-element">
         <p class="help-block"><?php _e( 'To change your password, enter the new password below and then repeat it to confirm, otherwise leave these two fields blank.', 'membership' ); ?></p>
