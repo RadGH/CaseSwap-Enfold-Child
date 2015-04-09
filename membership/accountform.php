@@ -114,49 +114,6 @@ if ( $success === false ) {
         </div>
       </div>
 
-      <h3>Investigator Preferences</h3>
-
-      <div class="form-element">
-        <label class="control-label" for="cs_user-state"><?php _e( 'State', 'caseswap' ); ?></label>
-        <div class="element">
-          <select name="cs_user[state]" id="cs_user-state">
-            <option value="">&ndash; Select &ndash;</option>
-            <?php
-            foreach( $all_states as $this_state ) {
-              echo sprintf(
-                '<option value="%s" %s>%s</option>',
-                esc_attr( $this_state ),
-                selected( in_array($this_state, $state), true, false ),
-                esc_html( $this_state )
-              );
-            }
-            ?>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-element">
-        <label class="control-label" for=""><?php _e( 'Investigation Types', 'caseswap' ); ?></label>
-        <div class="element">
-          <div class="cs_checkbox_list">
-            <?php
-            foreach( $all_types as $this_type ) {
-              $html_id = 'cs-investigator-type-' . sanitize_title_with_dashes($this_type);
-
-              echo sprintf(
-                '<div class="cs_cb_item"><label for="%s"><input type="checkbox" name="cs_user[investigator-types][]" id="%s" value="%s" %s> %s</label></div>',
-                esc_attr($html_id),
-                esc_attr($html_id),
-                esc_attr( $this_type ),
-                checked( in_array( $this_type, $types ), true, false ),
-                esc_html( $this_type )
-              );
-            }
-            ?>
-          </div>
-        </div>
-      </div>
-
       <?php
       /*
 			<div class="form-element">
@@ -228,6 +185,49 @@ if ( $success === false ) {
         <label class="control-label" for="pass1"><?php _e( 'Confirm Password', 'membership' ); ?></label>
         <div class="element">
           <input type="password" class="input-xlarge" name="pass2" id="pass2" value="" autocomplete="off">
+        </div>
+      </div>
+
+      <h3>Investigator Preferences</h3>
+
+      <div class="form-element">
+        <label class="control-label" for="cs_user-state"><?php _e( 'State', 'caseswap' ); ?></label>
+        <div class="element">
+          <select name="cs_user[state]" id="cs_user-state">
+            <option value="">&ndash; Select &ndash;</option>
+            <?php
+            foreach( $all_states as $this_state ) {
+              echo sprintf(
+                '<option value="%s" %s>%s</option>',
+                esc_attr( $this_state ),
+                selected( in_array($this_state, $state), true, false ),
+                esc_html( $this_state )
+              );
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-element">
+        <label class="control-label" for=""><?php _e( 'Investigation Types', 'caseswap' ); ?></label>
+        <div class="element">
+          <div class="cs_checkbox_list">
+            <?php
+            foreach( $all_types as $this_type ) {
+              $html_id = 'cs-investigator-type-' . sanitize_title_with_dashes($this_type);
+
+              echo sprintf(
+                '<div class="cs_cb_item"><label for="%s"><input type="checkbox" name="cs_user[investigator-types][]" id="%s" value="%s" %s> %s</label></div>',
+                esc_attr($html_id),
+                esc_attr($html_id),
+                esc_attr( $this_type ),
+                checked( in_array( $this_type, $types ), true, false ),
+                esc_html( $this_type )
+              );
+            }
+            ?>
+          </div>
         </div>
       </div>
 
