@@ -1,5 +1,8 @@
 <?php
 
+// Use a custom template for the Membership Premium account management page, and the [accountform] shortcode
+define( 'MEMBERSHIP_ACCOUNT_FORM', dirname(__FILE__) . '/membership/accountform.php' );
+
 /*
  * Gets the menu location key based on whether the user is logged in or not, or another condition.
  *
