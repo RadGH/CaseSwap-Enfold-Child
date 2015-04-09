@@ -1,17 +1,23 @@
 <?php
 
 $msg = '';
+$success = null;
 $user_id = get_current_user_id();
 
 if ( isset( $_POST['action'] ) && $_POST['action'] == 'update' ) {
+  $success = false;
+
   if ( wp_verify_nonce( $_REQUEST['_wpnonce'], 'update-user_' . $user_id ) ) {
     $msg = '<div class="alert alert-success">' . __( 'Your details have been updated.', 'membership' ) . '</div>';
+
     if ( !empty( $_POST['pass1'] ) && $_POST['pass1'] != $_POST['pass2'] ) {
       $msg = '<div class="alert alert-error">' . __( 'Your password settings do not match', 'membership' ) . "</div>";
     } else {
       $errors = edit_user( $user_id );
       if ( isset( $errors ) && is_wp_error( $errors ) ) {
         $msg = '<div class="alert alert-error">' . implode( '<br>', $errors->get_error_messages() ) . '</div>';
+      }else{
+        $success = true;
       }
     }
   } else {
@@ -22,6 +28,43 @@ if ( isset( $_POST['action'] ) && $_POST['action'] == 'update' ) {
 }
 
 $profileuser = get_user_to_edit( $user_id );
+
+// Save CaseSwap data if submit successful
+$submit_state = isset($_REQUEST['cs_user']['state'])              ? (array) stripslashes_deep($_REQUEST['cs_user']['state'])              : null;
+$submit_types = isset($_REQUEST['cs_user']['investigator-types']) ? (array) stripslashes_deep($_REQUEST['cs_user']['investigator-types']) : null;
+
+if ( $success ) {
+  if ( $submit_state !== null ) {
+    delete_user_meta( $profileuser->ID, 'state' );
+    foreach( $submit_state as $val ) {
+      add_user_meta( $profileuser->ID, 'state', $val );
+    }
+  }
+
+  if ( $submit_types !== null ) {
+    delete_user_meta( $profileuser->ID, 'investigator-types' );
+    foreach( $submit_types as $val ) {
+      add_user_meta( $profileuser->ID, 'investigator-types', $val );
+    }
+  }
+}
+
+// Get CaseSwap metadata to display in form
+global $CSCore;
+$options = $CSCore->Options->get_options();
+
+$all_states = $options['states'];
+$all_types = $options['investigator-types'];
+
+$state = get_user_meta( $profileuser->ID, 'state', false ); // Get preferred states
+$types = get_user_meta( $profileuser->ID, 'investigator-types', false );
+
+if ( $success === false ) {
+  // Failed to save data, keep the settings that the user tried to save so they can try again
+  if ( $submit_state !== null ) $state = $submit_state;
+  if ( $submit_types !== null ) $types = $submit_types;
+}
+
 
 ?><div id="membership-wrapper">
   <?php echo $msg ?>
@@ -39,10 +82,21 @@ $profileuser = get_user_to_edit( $user_id );
     <fieldset>
       <legend><?php _e( 'Edit your details', 'membership' ) ?></legend>
 
+      <?php
+      /*
       <div class="form-element">
         <label class="control-label" for="user_login"><?php _e( 'Username', 'membership' ); ?></label>
         <div class="element plaintext-element">
           <input type="text" id="user_login" nmae="user_login" class="plaintext-input" placeholder="" value="<?php echo esc_attr( $profileuser->user_login ); ?>" disabled="disabled" >
+        </div>
+      </div>
+      */
+      ?>
+
+      <div class="form-element">
+        <label class="control-label" for="email"><?php _e( 'Email', 'membership' ); ?></label>
+        <div class="element">
+          <input type="text" class="input-xlarge" name="email" id="email" value="<?php echo esc_attr( $profileuser->user_email ) ?>" />
         </div>
       </div>
 
@@ -57,6 +111,49 @@ $profileuser = get_user_to_edit( $user_id );
         <label class="control-label" for="last_name"><?php _e( 'Last Name', 'membership' ); ?></label>
         <div class="element">
           <input type="text" class="input-xlarge" id="last_name" name="last_name" placeholder="" value="<?php echo esc_attr( $profileuser->last_name ) ?>" >
+        </div>
+      </div>
+
+      <h3>Investigator Preferences</h3>
+
+      <div class="form-element">
+        <label class="control-label" for="cs_user-state"><?php _e( 'State', 'caseswap' ); ?></label>
+        <div class="element">
+          <select name="cs_user[state]" id="cs_user-state">
+            <option value="">&ndash; Select &ndash;</option>
+            <?php
+            foreach( $all_states as $this_state ) {
+              echo sprintf(
+                '<option value="%s" %s>%s</option>',
+                esc_attr( $this_state ),
+                selected( in_array($this_state, $state), true, false ),
+                esc_html( $this_state )
+              );
+            }
+            ?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-element">
+        <label class="control-label" for=""><?php _e( 'Investigation Types', 'caseswap' ); ?></label>
+        <div class="element">
+          <div class="cs_checkbox_list">
+            <?php
+            foreach( $all_types as $this_type ) {
+              $html_id = 'cs-investigator-type-' . sanitize_title_with_dashes($this_type);
+
+              echo sprintf(
+                '<div class="cs_cb_item"><label for="%s"><input type="checkbox" name="cs_user[investigator-types][]" id="%s" value="%s" %s> %s</label></div>',
+                esc_attr($html_id),
+                esc_attr($html_id),
+                esc_attr( $this_type ),
+                checked( in_array( $this_type, $types ), true, false ),
+                esc_html( $this_type )
+              );
+            }
+            ?>
+          </div>
         </div>
       </div>
 
@@ -104,13 +201,6 @@ $profileuser = get_user_to_edit( $user_id );
 			</div>
       */
       ?>
-
-      <div class="form-element">
-        <label class="control-label" for="email"><?php _e( 'Email', 'membership' ); ?></label>
-        <div class="element">
-          <input type="text" class="input-xlarge" name="email" id="email" value="<?php echo esc_attr( $profileuser->user_email ) ?>" />
-        </div>
-      </div>
 
       <?php
       /*
