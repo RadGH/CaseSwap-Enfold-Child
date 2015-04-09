@@ -8,3 +8,21 @@ Template:     enfold
 Version:      1.0.0
 License:      Copyright 2015 CaseSwap.com
 */
+
+/* This input looks like a paragraph of text, but with the layout of a text input. Used on the account page, for username */
+#top .main_color input.plaintext-input {
+  border: none;
+  background: none;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Makes disabled textual fields show a text cursor */
+textarea[disabled],
+input[type="text"][disabled],
+input[type="email"][disabled],
+input[type="number"][disabled],
+input[type="password"][disabled] {
+  cursor: text;
+}
