@@ -125,3 +125,25 @@ input[type="password"][disabled] {
     background: #fff;
   }
 }
+
+
+
+/* Give a better layout for the subscriptions page */
+div.priceboxes span.title {
+  font-size: 20px;
+  padding: 20px;
+}
+div.priceboxes .bottombar {
+  padding: 20px;
+}
+div.priceboxes span.price {
+  font-size: 20px;
+}
+
+div.priceboxes  div.bottombar span.link {
+  float: none;
+  margin-right: 0;
+}
+div.priceboxes  div.bottombar span.link a {
+  float: right;
+}
