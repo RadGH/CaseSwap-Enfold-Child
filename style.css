@@ -26,3 +26,102 @@ input[type="number"][disabled],
 input[type="password"][disabled] {
   cursor: text;
 }
+
+
+/* Better responsive navigation */
+@media ( max-width: 920px ) and ( min-width: 781px ) {
+  .av_header_top #advanced_menu_toggle {
+    display: none;
+  }
+
+  .responsive .logo {
+    position: static;
+    margin: 0 auto;
+
+    float: none;
+    display: block;
+    max-width: 300px;
+  }
+
+  .av_header_top nav.main_menu {
+    display: block;
+
+    clear: left;
+    position: static;
+    text-align: center;
+    width: auto;
+  }
+
+  .av_header_top nav.main_menu .av-main-nav-wrap {
+    float: none;
+  }
+  .av_header_top nav.main_menu .av-main-nav li {
+    float: none;
+    display: inline-block;
+  }
+}
+@media ( max-width: 780px ) {
+  .av_header_top #advanced_menu_toggle {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+
+    color: #333333;
+
+  }
+  html.html_main_nav_header .show_mobile_menu .av_header_top #advanced_menu_toggle {
+    display: none;
+  }
+
+  html.html_main_nav_header #mobile-advanced,
+  html.html_main_nav_header .show_mobile_menu #mobile-advanced {
+    transform: none;
+    transition: right 260ms linear;
+  }
+  html.html_main_nav_header #mobile-advanced {
+    right: -100%;
+
+    max-width: 300px;
+    display: block !important;
+    visibility: visible;
+    opacity: 1;
+  }
+  html.html_main_nav_header .show_mobile_menu #mobile-advanced {
+    right: 0%;
+  }
+
+  #advanced_menu_hide {
+    right: 54px;
+    top: 42px;
+  }
+  .show_mobile_menu #advanced_menu_hide {
+    display: block;
+
+  }
+
+  .av_header_top nav.main_menu {
+    display: none;
+  }
+
+  .responsive #top .av_header_transparency.av_alternate_logo_active .logo a > img {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .responsive #top .av_header_transparency.av_alternate_logo_active .logo a img.alternate {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  #wrap_all #header {
+    position: relative;
+    width: 100%;
+    float: none;
+    height: auto;
+    margin: 0 !important;
+    opacity: 1;
+    background: #fff;
+  }
+}
