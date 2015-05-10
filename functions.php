@@ -3,6 +3,15 @@
 // Use a custom template for the Membership Premium account management page, and the [accountform] shortcode
 define( 'MEMBERSHIP_ACCOUNT_FORM', dirname(__FILE__) . '/membership/accountform.php' );
 
+/* Include Select2 from CDN to usje on account page, allowing users to select multiple states */
+function caseswap_enqueue_select2() {
+  wp_enqueue_script( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', array( 'jquery' ), '4.0.0', true );
+  wp_enqueue_style( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', array(), '4.0.0' );
+}
+add_action( 'admin_enqueue_script', 'caseswap_enqueue_select2' );
+add_action( 'wp_enqueue_script', 'caseswap_enqueue_select2' );
+
+
 /*
  * Gets the menu location key based on whether the user is logged in or not, or another condition.
  *
