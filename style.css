@@ -9,6 +9,10 @@ Version:      1.0.0
 License:      Copyright 2015 CaseSwap.com
 */
 
+#wrap_all {
+  position: relative;
+}
+
 /* This input looks like a paragraph of text, but with the layout of a text input. Used on the account page, for username */
 #top .main_color input.plaintext-input {
   border: none;
