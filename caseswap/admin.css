@@ -1,0 +1,60 @@
+/* Improved select2 appearance on account page */
+.select2 .select2-selection {
+  border-color: #e1e1e1;
+  background-color: #ffffff;
+  color: #8d8d8d;
+  min-width: 450px;
+}
+
+.select2.select2-container--focus .select2-selection {
+  border-color: #e1e1e1;
+  background-color: #ffffff;
+  color: #8d8d8d;
+
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+  color: #555;
+}
+
+.select2 .select2-selection li {
+  padding: 0;
+  margin-left: 0;
+}
+
+.select2 .select2-selection--multiple .select2-selection__choice {
+  border-color: #0F5583;
+  background-color: #0F5583;
+  color: #ffffff;
+}
+
+.select2 .select2-selection--multiple .select2-selection__choice__remove {
+  color: #FFF;
+}
+
+.select2-dropdown {
+  border-color: #e1e1e1;
+  background-color: #ffffff;
+
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.4);
+  color: #555;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  border-color: #0F5583;
+  background-color: #0F5583;
+  color: #ffffff;
+}
+
+#top .select2-selection--multiple .select2-search input {
+  display: inline-block;
+  border-color: transparent;
+  margin: 5px 0;
+  padding: 0;
+
+  color: #888;
+}
+
+#your-profile select#cs-state {
+  width: 450px;
+  max-width: none;
+  height: 102px;
+}

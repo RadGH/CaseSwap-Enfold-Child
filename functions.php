@@ -8,10 +8,19 @@ function caseswap_enqueue_scripts() {
   wp_enqueue_script( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', array( 'jquery' ), '4.0.0', true );
   wp_enqueue_style( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', array(), '4.0.0' );
 
-  wp_enqueue_script( 'caseswap', get_stylesheet_directory_uri() . '/js/caseswap.js', array('jquery', 'select2'), '4.0.0', true );
+  wp_enqueue_script( 'caseswap', get_stylesheet_directory_uri() . '/caseswap/theme.js', array('jquery', 'select2'), '4.0.0', true );
 }
-add_action( 'admin_enqueue_scripts', 'caseswap_enqueue_scripts' );
 add_action( 'wp_enqueue_scripts', 'caseswap_enqueue_scripts' );
+
+
+function caseswap_enqueue_admin_scripts() {
+  wp_enqueue_script( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js', array( 'jquery' ), '4.0.0', true );
+  wp_enqueue_style( 'select2', '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css', array(), '4.0.0' );
+
+  wp_enqueue_script( 'caseswap-admin', get_stylesheet_directory_uri() . '/caseswap/admin.js', array('jquery', 'select2'), '4.0.0', true );
+  wp_enqueue_style( 'caseswap-admin', get_stylesheet_directory_uri() . '/caseswap/admin.css', array(), '4.0.0' );
+}
+add_action( 'admin_enqueue_scripts', 'caseswap_enqueue_admin_scripts' );
 
 
 /*

@@ -192,7 +192,7 @@ if ( $success === false ) {
       <h3>Investigator Preferences</h3>
 
       <div class="form-element">
-        <label class="control-label" for="cs_user-state"><?php _e( 'State', 'caseswap' ); ?></label>
+        <label class="control-label" for="cs_user-state"><?php _e( 'Licensed States', 'caseswap' ); ?></label>
         <div class="element">
           <select name="cs_user[state][]" id="cs_user-state" multiple>
             <option value="">&ndash; Select &ndash;</option>
