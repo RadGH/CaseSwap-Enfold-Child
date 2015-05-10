@@ -33,6 +33,7 @@ $profileuser = get_user_to_edit( $user_id );
 $submit_state = isset($_REQUEST['cs_user']['state'])              ? (array) stripslashes_deep($_REQUEST['cs_user']['state'])              : null;
 $submit_types = isset($_REQUEST['cs_user']['investigator-types']) ? (array) stripslashes_deep($_REQUEST['cs_user']['investigator-types']) : null;
 
+
 if ( $success ) {
   if ( $submit_state !== null ) {
     delete_user_meta( $profileuser->ID, 'state' );
@@ -193,7 +194,7 @@ if ( $success === false ) {
       <div class="form-element">
         <label class="control-label" for="cs_user-state"><?php _e( 'State', 'caseswap' ); ?></label>
         <div class="element">
-          <select name="cs_user[state]" id="cs_user-state">
+          <select name="cs_user[state][]" id="cs_user-state" multiple>
             <option value="">&ndash; Select &ndash;</option>
             <?php
             foreach( $all_states as $this_state ) {
